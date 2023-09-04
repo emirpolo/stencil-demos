@@ -6,56 +6,47 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface StoreDemo {
+        "start": number;
+    }
+    interface StoreDemoChild {
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLStoreDemoElement extends Components.StoreDemo, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLStoreDemoElement: {
+        prototype: HTMLStoreDemoElement;
+        new (): HTMLStoreDemoElement;
+    };
+    interface HTMLStoreDemoChildElement extends Components.StoreDemoChild, HTMLStencilElement {
+    }
+    var HTMLStoreDemoChildElement: {
+        prototype: HTMLStoreDemoChildElement;
+        new (): HTMLStoreDemoChildElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "store-demo": HTMLStoreDemoElement;
+        "store-demo-child": HTMLStoreDemoChildElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface StoreDemo {
+        "start"?: number;
+    }
+    interface StoreDemoChild {
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "store-demo": StoreDemo;
+        "store-demo-child": StoreDemoChild;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "store-demo": LocalJSX.StoreDemo & JSXBase.HTMLAttributes<HTMLStoreDemoElement>;
+            "store-demo-child": LocalJSX.StoreDemoChild & JSXBase.HTMLAttributes<HTMLStoreDemoChildElement>;
         }
     }
 }

@@ -26,11 +26,12 @@
     "generate": "stencil generate"
   },
   "dependencies": {
-    "@stencil/core": "^4.0.0"
+    "@stencil/core": "^4.1.0"
   },
   "devDependencies": {
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.11",
+    "@stencil/store": "^2.0.9",
     "jest": "^27.5.1",
     "jest-cli": "^27.5.1",
     "puppeteer": "^21.0.3"
