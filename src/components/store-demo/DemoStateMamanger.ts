@@ -8,11 +8,9 @@ interface IStore {
 const Manager = new Map<string, IStore>();
 const initialState: IStore = { seconds: 0 };
 
-globalThis.manager = Manager;
+let parentElementName; 
 
-let parentElementName;
-
-export const StateManager = {
+export const DemoStateManager = {
   new(componentRef: ComponentInterface) {
     const { state } = createStore<IStore>(initialState);
     const parentElement = getElement(componentRef);

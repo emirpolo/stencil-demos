@@ -1,12 +1,12 @@
 import { Component, ComponentInterface, Fragment, Prop, h } from '@stencil/core';
-import { StateManager } from './store';
+import { DemoStateManager } from './DemoStateMamanger';
 
 @Component({
   tag: 'store-demo',
   styles: 'store-demo {display: block; border: 1px solid; padding: 10px; margin: 10px}',
 })
 export class StoreDemo implements ComponentInterface {
-  private readonly state = StateManager.new(this);
+  private readonly state = DemoStateManager.new(this);
 
   @Prop() start = 0;
 
@@ -16,7 +16,7 @@ export class StoreDemo implements ComponentInterface {
   }
 
   disconnectedCallback(): void {
-    StateManager.delete(this);
+    DemoStateManager.delete(this);
   }
 
   render() {
