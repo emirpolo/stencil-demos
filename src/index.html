@@ -9,8 +9,18 @@
     <script nomodule src="/build/stencil-starter-project-name.js"></script>
   </head>
   <body>
-    <store-demo></store-demo>
+    <!-- <store-demo></store-demo>
     <store-demo start="15"></store-demo>
-    <store-demo start="30"></store-demo>
+    <store-demo start="30"></store-demo> -->
+
+    <my-panel name="parent 1"></my-panel>
+
+    <my-panel name="parent 2"></my-panel>
+
+
+    <script>
+      window.addEventListener('notifyToParent', console.log)
+    </script>
+
   </body>
 </html>

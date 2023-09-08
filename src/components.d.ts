@@ -6,13 +6,56 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface MyChild {
+    }
+    interface MyPanel {
+        "actions": (string | { label: string; trigger(evt: any): void; })[];
+    }
+    interface MyPanelActionMenu {
+        /**
+          * Data that will be triggered when a menu item is clicked
+         */
+        "dataToDispatch": {};
+        "menuItems": any[];
+        "show": () => Promise<void>;
+    }
+    interface MySubchild {
+    }
     interface StoreDemo {
         "start": number;
     }
     interface StoreDemoChild {
     }
 }
+export interface MySubchildCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMySubchildElement;
+}
 declare global {
+    interface HTMLMyChildElement extends Components.MyChild, HTMLStencilElement {
+    }
+    var HTMLMyChildElement: {
+        prototype: HTMLMyChildElement;
+        new (): HTMLMyChildElement;
+    };
+    interface HTMLMyPanelElement extends Components.MyPanel, HTMLStencilElement {
+    }
+    var HTMLMyPanelElement: {
+        prototype: HTMLMyPanelElement;
+        new (): HTMLMyPanelElement;
+    };
+    interface HTMLMyPanelActionMenuElement extends Components.MyPanelActionMenu, HTMLStencilElement {
+    }
+    var HTMLMyPanelActionMenuElement: {
+        prototype: HTMLMyPanelActionMenuElement;
+        new (): HTMLMyPanelActionMenuElement;
+    };
+    interface HTMLMySubchildElement extends Components.MySubchild, HTMLStencilElement {
+    }
+    var HTMLMySubchildElement: {
+        prototype: HTMLMySubchildElement;
+        new (): HTMLMySubchildElement;
+    };
     interface HTMLStoreDemoElement extends Components.StoreDemo, HTMLStencilElement {
     }
     var HTMLStoreDemoElement: {
@@ -26,17 +69,40 @@ declare global {
         new (): HTMLStoreDemoChildElement;
     };
     interface HTMLElementTagNameMap {
+        "my-child": HTMLMyChildElement;
+        "my-panel": HTMLMyPanelElement;
+        "my-panel-action-menu": HTMLMyPanelActionMenuElement;
+        "my-subchild": HTMLMySubchildElement;
         "store-demo": HTMLStoreDemoElement;
         "store-demo-child": HTMLStoreDemoChildElement;
     }
 }
 declare namespace LocalJSX {
+    interface MyChild {
+    }
+    interface MyPanel {
+        "actions"?: (string | { label: string; trigger(evt: any): void; })[];
+    }
+    interface MyPanelActionMenu {
+        /**
+          * Data that will be triggered when a menu item is clicked
+         */
+        "dataToDispatch"?: {};
+        "menuItems"?: any[];
+    }
+    interface MySubchild {
+        "onNotifyToParent"?: (event: MySubchildCustomEvent<{ action: string, data, originalEvent }>) => void;
+    }
     interface StoreDemo {
         "start"?: number;
     }
     interface StoreDemoChild {
     }
     interface IntrinsicElements {
+        "my-child": MyChild;
+        "my-panel": MyPanel;
+        "my-panel-action-menu": MyPanelActionMenu;
+        "my-subchild": MySubchild;
         "store-demo": StoreDemo;
         "store-demo-child": StoreDemoChild;
     }
@@ -45,6 +111,10 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "my-child": LocalJSX.MyChild & JSXBase.HTMLAttributes<HTMLMyChildElement>;
+            "my-panel": LocalJSX.MyPanel & JSXBase.HTMLAttributes<HTMLMyPanelElement>;
+            "my-panel-action-menu": LocalJSX.MyPanelActionMenu & JSXBase.HTMLAttributes<HTMLMyPanelActionMenuElement>;
+            "my-subchild": LocalJSX.MySubchild & JSXBase.HTMLAttributes<HTMLMySubchildElement>;
             "store-demo": LocalJSX.StoreDemo & JSXBase.HTMLAttributes<HTMLStoreDemoElement>;
             "store-demo-child": LocalJSX.StoreDemoChild & JSXBase.HTMLAttributes<HTMLStoreDemoChildElement>;
         }
